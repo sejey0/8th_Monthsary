@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy 8th Monthsary</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rose: "#E8A0A0",
+              rosegold: "#B76E79",
+              wine: "#722F37",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "Georgia", "serif"],
+              sans: ['"Lato"', "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Smooth scroll for the entire page */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Fade-in animation for the letter content */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Gentle floating animation for the heart icon */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      /* Pulse animation for the heart */
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        15% {
+          transform: scale(1.15);
+        }
+        30% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.1);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .fade-in-up-delay-1 {
+        animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        opacity: 0;
+      }
+
+      .fade-in-up-delay-2 {
+        animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        opacity: 0;
+      }
+
+      .fade-in-up-delay-3 {
+        animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        opacity: 0;
+      }
+
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .heartbeat {
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      /* Overlay fade-out transition */
+      #overlay {
+        transition: opacity 0.6s ease-out;
+      }
+
+      /* Subtle underline hover effect for highlighted text */
+      .highlight-hover {
+        position: relative;
+        display: inline;
+      }
+      .highlight-hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 1px;
+        background-color: #b76e79;
+        transition: width 0.3s ease;
+      }
+      .highlight-hover:hover::after {
+        width: 100%;
+      }
+
+      /* Shake animation for incorrect key */
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-8px);
+        }
+        40% {
+          transform: translateX(8px);
+        }
+        60% {
+          transform: translateX(-6px);
+        }
+        80% {
+          transform: translateX(6px);
+        }
+      }
+      .shake {
+        animation: shake 0.4s ease-out;
+      }
+    </style>
+  </head>
+  <body class="bg-white font-sans text-gray-800 min-h-screen">
+    <!-- ========================================
+       SECURITY KEY OVERLAY
+       Full-page overlay that blocks content
+       until the correct key is entered.
+       ======================================== -->
+    <div
+      id="overlay"
+      class="fixed inset-0 z-50 flex items-center justify-center"
+      style="
+        background: linear-gradient(
+          135deg,
+          #722f37 0%,
+          #b76e79 50%,
+          #e8a0a0 100%
+        );
+      "
+    >
+      <div
+        class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 sm:p-12 mx-4 max-w-md w-full text-center"
+      >
+        <!-- Heart icon on the overlay -->
+        <div class="text-5xl mb-4 heartbeat">&#10084;</div>
+        <h2
+          class="font-serif text-2xl sm:text-3xl text-wine font-semibold mb-2"
+        >
+          A Letter For You
+        </h2>
+        <p class="text-rosegold text-sm mb-8">
+          Enter the key to unlock this letter
+        </p>
+
+        <!-- Security key input -->
+        <div id="input-wrapper">
+          <input
+            id="keyInput"
+            type="password"
+            placeholder="Enter security key"
+            class="w-full px-4 py-3 rounded-lg border-2 border-rose/50 focus:border-rosegold focus:outline-none text-center text-lg tracking-widest transition-colors duration-300"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Error message (hidden by default) -->
+        <p id="errorMsg" class="text-red-500 text-sm mt-3 hidden">
+          Incorrect key. Please try again.
+        </p>
+
+        <!-- Submit button -->
+        <button
+          id="submitBtn"
+          class="mt-6 w-full py-3 rounded-lg bg-wine text-white font-medium tracking-wide hover:bg-rosegold transition-colors duration-300 active:scale-[0.98]"
+        >
+          Unlock
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================
+       MAIN LETTER CONTENT
+       Hidden initially; revealed after correct
+       key entry with fade-in animations.
+       ======================================== -->
+    <main id="letterContent" class="hidden">
+      <div class="max-w-2xl mx-auto px-6 py-16 sm:py-24">
+        <!-- Decorative top line -->
+        <div class="flex justify-center mb-10 fade-in-up">
+          <div class="w-16 h-px bg-rosegold"></div>
+        </div>
+
+        <!-- Heading section with heart icon -->
+        <header class="text-center mb-14 fade-in-up">
+          <!-- Rose / heart icon -->
+          <span class="inline-block text-rose text-4xl mb-4 float-animation"
+            >&#10087;</span
+          >
+          <h1
+            class="font-serif text-4xl sm:text-5xl text-wine font-bold leading-tight"
+          >
+            Happy Monthsary!
+          </h1>
+          <p class="text-rosegold mt-3 text-lg font-light tracking-wide">
+            8th Month Together
+          </p>
+          <!-- Decorative divider -->
+          <div class="flex items-center justify-center gap-3 mt-6">
+            <div class="w-12 h-px bg-rose"></div>
+            <span class="text-rosegold text-xs">&#10084;</span>
+            <div class="w-12 h-px bg-rose"></div>
+          </div>
+        </header>
+
+        <!-- Letter body -->
+        <article
+          class="space-y-6 leading-relaxed text-gray-700 fade-in-up-delay-1"
+        >
+          <p class="font-serif text-xl text-wine italic">My Dearest Love,</p>
+
+          <p>
+            Eight months. It feels like we've shared a lifetime of laughter,
+            quiet moments, and all the little things that make
+            <span class="text-rosegold font-medium highlight-hover">us</span>
+            who we are. Every day with you is a gift I never want to stop
+            unwrapping.
+          </p>
+
+          <p>
+            I love the way you make the ordinary feel
+            <span class="text-rosegold font-medium highlight-hover"
+              >extraordinary</span
+            >
+            &mdash; how a simple conversation with you turns into the highlight
+            of my day, how your smile can turn everything around, and how your
+            presence alone makes everything feel like home.
+          </p>
+
+          <p>
+            Thank you for choosing me, for staying, for being patient, and for
+            loving me in ways I never thought I deserved. You are my
+            <span class="text-wine font-semibold highlight-hover"
+              >favorite person</span
+            >, my safe place, and my greatest adventure.
+          </p>
+
+          <p>
+            Here's to many more months, many more memories, and a love that only
+            grows deeper with time.
+          </p>
+
+          <p class="pt-4">Forever and always yours,</p>
+        </article>
+
+        <!-- Signature / closing -->
+        <div class="mt-8 fade-in-up-delay-2">
+          <p class="font-serif text-2xl text-wine italic">
+            &mdash; With all my love &#10084;
+          </p>
+        </div>
+
+        <!-- Decorative bottom section -->
+        <div class="mt-16 text-center fade-in-up-delay-3">
+          <div class="flex items-center justify-center gap-3">
+            <div class="w-12 h-px bg-rose"></div>
+            <span class="text-rosegold text-sm">&#10087;</span>
+            <div class="w-12 h-px bg-rose"></div>
+          </div>
+          <p class="text-rose text-xs mt-4 tracking-widest uppercase">
+            8 months of love
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========================================
+       JAVASCRIPT
+       Handles security key validation,
+       overlay dismissal, and content reveal.
+       ======================================== -->
+    <script>
+      // --- Configuration ---
+      const SECURITY_KEY = "LOVE2026";
+
+      // --- DOM Elements ---
+      const overlay = document.getElementById("overlay");
+      const letterContent = document.getElementById("letterContent");
+      const keyInput = document.getElementById("keyInput");
+      const submitBtn = document.getElementById("submitBtn");
+      const errorMsg = document.getElementById("errorMsg");
+      const inputWrapper = document.getElementById("input-wrapper");
+
+      /**
+       * Validates the entered key and reveals the letter
+       * if the key matches. Shows an error with a shake
+       * animation if the key is incorrect.
+       */
+      function attemptUnlock() {
+        const enteredKey = keyInput.value.trim();
+
+        if (enteredKey === SECURITY_KEY) {
+          // Correct key: fade out overlay, reveal content
+          overlay.style.opacity = "0";
+
+          // After the fade-out transition ends, hide overlay and show letter
+          setTimeout(() => {
+            overlay.classList.add("hidden");
+            letterContent.classList.remove("hidden");
+          }, 600);
+        } else {
+          // Incorrect key: show error and shake the input
+          errorMsg.classList.remove("hidden");
+          inputWrapper.classList.add("shake");
+
+          // Remove shake class after animation so it can retrigger
+          setTimeout(() => {
+            inputWrapper.classList.remove("shake");
+          }, 400);
+        }
+      }
+
+      // Listen for button click
+      submitBtn.addEventListener("click", attemptUnlock);
+
+      // Listen for Enter key press inside the input
+      keyInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          attemptUnlock();
+        }
+      });
+
+      // Clear error message when user starts typing again
+      keyInput.addEventListener("input", () => {
+        if (!errorMsg.classList.contains("hidden")) {
+          errorMsg.classList.add("hidden");
+        }
+      });
+
+      // Auto-focus the input on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        keyInput.focus();
+      });
+    </script>
+  </body>
+</html>
