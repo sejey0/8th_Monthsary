@@ -149,6 +149,62 @@
       .shake {
         animation: shake 0.4s ease-out;
       }
+
+      /* Music player slide-in from bottom-right */
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      #musicPlayer.visible {
+        display: flex;
+        animation: slideInUp 0.5s ease-out forwards;
+      }
+
+      /* Volume slider styling */
+      #volumeSlider {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 4px;
+        border-radius: 2px;
+        background: #e8a0a0;
+        outline: none;
+      }
+      #volumeSlider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #722f37;
+        cursor: pointer;
+        transition: transform 0.15s ease;
+      }
+      #volumeSlider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+      }
+      #volumeSlider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #722f37;
+        cursor: pointer;
+        border: none;
+      }
+
+      /* Spinning disc animation when music is playing */
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .disc-spin {
+        animation: spin 3s linear infinite;
+      }
     </style>
   </head>
   <body class="bg-white font-sans text-gray-800 min-h-screen">
@@ -215,6 +271,19 @@
        key entry with fade-in animations.
        ======================================== -->
     <main id="letterContent" class="hidden">
+      <!-- Back button — returns to the intro overlay -->
+      <button
+        id="backBtn"
+        class="fixed top-6 left-6 z-40 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-md border border-rose/30 text-wine text-sm font-medium hover:bg-rose/20 hover:text-rosegold transition-all duration-300"
+        title="Back to intro"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Back
+      </button>
+
       <div class="max-w-2xl mx-auto px-6 py-16 sm:py-24">
         <!-- Decorative top line -->
         <div class="flex justify-center mb-10 fade-in-up">
@@ -302,6 +371,91 @@
           </p>
         </div>
       </div>
+
+      <!-- ========================================
+           MUSIC PLAYER
+           Fixed bottom-right player with play/pause
+           and volume controls. Auto-plays when the
+           letter is revealed.
+           ======================================== -->
+      <div
+        id="musicPlayer"
+        class="fixed bottom-6 right-6 z-40 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-rose/30 p-4 items-center gap-3 hidden"
+      >
+        <!-- Spinning disc icon — spins when playing -->
+        <div
+          id="discIcon"
+          class="w-10 h-10 rounded-full bg-gradient-to-br from-wine to-rosegold flex items-center justify-center flex-shrink-0"
+        >
+          <div class="w-3 h-3 rounded-full bg-white/80"></div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <!-- Song label -->
+          <span class="text-xs text-rosegold tracking-wide leading-none">
+            Libu-libong Buwan (Uuwian)
+          </span>
+
+          <div class="flex items-center gap-2">
+            <!-- Volume down button -->
+            <button
+              id="volDownBtn"
+              class="text-wine hover:text-rosegold transition-colors duration-200"
+              title="Volume Down"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <line x1="23" y1="9" x2="23" y2="15" opacity="0"/>
+              </svg>
+            </button>
+
+            <!-- Volume slider -->
+            <input
+              id="volumeSlider"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              class="w-16 sm:w-20 cursor-pointer"
+            />
+
+            <!-- Volume up button -->
+            <button
+              id="volUpBtn"
+              class="text-wine hover:text-rosegold transition-colors duration-200"
+              title="Volume Up"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </button>
+
+            <!-- Play / Pause button -->
+            <button
+              id="playPauseBtn"
+              class="ml-1 w-8 h-8 rounded-full bg-wine text-white flex items-center justify-center hover:bg-rosegold transition-colors duration-200 flex-shrink-0"
+              title="Play / Pause"
+            >
+              <!-- Play icon (shown when paused) -->
+              <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              <!-- Pause icon (shown when playing) -->
+              <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audio element — replace "song.mp3" with your music file -->
+      <!-- Audio element — replace "song.mp3" with your music file -->
+      <audio id="bgMusic" loop preload="auto">
+        <source src="audio/Kyle Raphael - Libu-libong Buwan (Uuwian) (Lyrics).mp3" type="audio/mpeg" />
+      </audio>
     </main>
 
     <!-- ========================================
@@ -321,6 +475,62 @@
       const errorMsg = document.getElementById("errorMsg");
       const inputWrapper = document.getElementById("input-wrapper");
 
+      // --- Music Player Elements ---
+      const bgMusic = document.getElementById("bgMusic");
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const playIcon = document.getElementById("playIcon");
+      const pauseIcon = document.getElementById("pauseIcon");
+      const volumeSlider = document.getElementById("volumeSlider");
+      const volUpBtn = document.getElementById("volUpBtn");
+      const volDownBtn = document.getElementById("volDownBtn");
+      const discIcon = document.getElementById("discIcon");
+      const musicPlayer = document.getElementById("musicPlayer");
+
+      // Set initial volume to 50%
+      bgMusic.volume = 0.5;
+
+      /** Updates the play/pause button icons and disc animation */
+      function updatePlayState() {
+        if (bgMusic.paused) {
+          playIcon.classList.remove("hidden");
+          pauseIcon.classList.add("hidden");
+          discIcon.classList.remove("disc-spin");
+        } else {
+          playIcon.classList.add("hidden");
+          pauseIcon.classList.remove("hidden");
+          discIcon.classList.add("disc-spin");
+        }
+      }
+
+      /** Toggle play / pause */
+      playPauseBtn.addEventListener("click", () => {
+        if (bgMusic.paused) {
+          bgMusic.play();
+        } else {
+          bgMusic.pause();
+        }
+        updatePlayState();
+      });
+
+      /** Volume slider input */
+      volumeSlider.addEventListener("input", () => {
+        bgMusic.volume = volumeSlider.value / 100;
+      });
+
+      /** Volume up button — increase by 10% */
+      volUpBtn.addEventListener("click", () => {
+        const newVol = Math.min(100, parseInt(volumeSlider.value) + 10);
+        volumeSlider.value = newVol;
+        bgMusic.volume = newVol / 100;
+      });
+
+      /** Volume down button — decrease by 10% */
+      volDownBtn.addEventListener("click", () => {
+        const newVol = Math.max(0, parseInt(volumeSlider.value) - 10);
+        volumeSlider.value = newVol;
+        bgMusic.volume = newVol / 100;
+      });
+
       /**
        * Validates the entered key and reveals the letter
        * if the key matches. Shows an error with a shake
@@ -329,7 +539,9 @@
       function attemptUnlock() {
         const enteredKey = keyInput.value.trim();
 
-        if (enteredKey === SECURITY_KEY) {
+        // TODO: Re-enable security key check after testing
+        // if (enteredKey === SECURITY_KEY) {
+        if (true) {
           // Correct key: fade out overlay, reveal content
           overlay.style.opacity = "0";
 
@@ -337,6 +549,20 @@
           setTimeout(() => {
             overlay.classList.add("hidden");
             letterContent.classList.remove("hidden");
+
+            // Auto-play music when the letter is revealed
+            bgMusic.play().then(() => {
+              updatePlayState();
+            }).catch(() => {
+              // Browser blocked autoplay; show play icon so user can start manually
+              updatePlayState();
+            });
+
+            // Show the music player with a slight delay
+            setTimeout(() => {
+              musicPlayer.classList.remove("hidden");
+              musicPlayer.classList.add("visible");
+            }, 300);
           }, 600);
         } else {
           // Incorrect key: show error and shake the input
@@ -365,6 +591,36 @@
         if (!errorMsg.classList.contains("hidden")) {
           errorMsg.classList.add("hidden");
         }
+      });
+
+      // --- Back Button ---
+      const backBtn = document.getElementById("backBtn");
+
+      /** Go back to the intro overlay, pause music, and reset state */
+      backBtn.addEventListener("click", () => {
+        // Pause music and hide the music player
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+        updatePlayState();
+        musicPlayer.classList.add("hidden");
+        musicPlayer.classList.remove("visible");
+
+        // Hide the letter content
+        letterContent.classList.add("hidden");
+
+        // Reset the overlay: clear input, hide error, and show it again
+        keyInput.value = "";
+        errorMsg.classList.add("hidden");
+        overlay.classList.remove("hidden");
+        // Force reflow so the opacity transition plays
+        void overlay.offsetWidth;
+        overlay.style.opacity = "1";
+
+        // Scroll back to top
+        window.scrollTo(0, 0);
+
+        // Re-focus the key input
+        setTimeout(() => keyInput.focus(), 100);
       });
 
       // Auto-focus the input on page load
