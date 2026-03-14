@@ -199,11 +199,42 @@
 
       /* Spinning disc animation when music is playing */
       @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
       .disc-spin {
         animation: spin 3s linear infinite;
+      }
+
+      /* Gentle glow pulse for zodiac icons */
+      @keyframes glowPulse {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 4px rgba(183, 110, 121, 0.3));
+        }
+        50% {
+          filter: drop-shadow(0 0 10px rgba(183, 110, 121, 0.6));
+        }
+      }
+      .zodiac-glow {
+        animation: glowPulse 3s ease-in-out infinite;
+      }
+
+      /* Slow rotation for zodiac constellation ring */
+      @keyframes slowSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .slow-spin {
+        animation: slowSpin 30s linear infinite;
       }
     </style>
   </head>
@@ -277,9 +308,18 @@
         class="fixed top-6 left-6 z-40 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-md border border-rose/30 text-wine text-sm font-medium hover:bg-rose/20 hover:text-rosegold transition-all duration-300"
         title="Back to intro"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"/>
-          <polyline points="12 19 5 12 12 5"/>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
         </svg>
         Back
       </button>
@@ -290,67 +330,175 @@
           <div class="w-16 h-px bg-rosegold"></div>
         </div>
 
-        <!-- Heading section with heart icon -->
+        <!-- Heading section with zodiac signs -->
         <header class="text-center mb-14 fade-in-up">
-          <!-- Rose / heart icon -->
-          <span class="inline-block text-rose text-4xl mb-4 float-animation"
-            >&#10087;</span
-          >
+          <!-- Zodiac pairing: Aquarius & Sagittarius with heart -->
+          <div class="flex items-center justify-center gap-4 mb-6">
+            <!-- Aquarius symbol ♒ -->
+            <div class="zodiac-glow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-14 h-14 sm:w-16 sm:h-16"
+                viewBox="0 0 64 64"
+                fill="none"
+              >
+                <circle
+                  cx="32"
+                  cy="32"
+                  r="30"
+                  stroke="#E8A0A0"
+                  stroke-width="1.5"
+                  fill="none"
+                  opacity="0.4"
+                />
+                <text
+                  x="32"
+                  y="40"
+                  text-anchor="middle"
+                  font-size="28"
+                  fill="#722F37"
+                  font-family="serif"
+                >
+                  &#9810;
+                </text>
+              </svg>
+            </div>
+
+            <!-- Heart connector -->
+            <div class="flex flex-col items-center gap-1">
+              <span class="text-rosegold text-2xl heartbeat">&#10084;</span>
+              <div class="w-px h-4 bg-rose/50"></div>
+            </div>
+
+            <!-- Sagittarius symbol ♐ -->
+            <div class="zodiac-glow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-14 h-14 sm:w-16 sm:h-16"
+                viewBox="0 0 64 64"
+                fill="none"
+              >
+                <circle
+                  cx="32"
+                  cy="32"
+                  r="30"
+                  stroke="#E8A0A0"
+                  stroke-width="1.5"
+                  fill="none"
+                  opacity="0.4"
+                />
+                <text
+                  x="32"
+                  y="40"
+                  text-anchor="middle"
+                  font-size="28"
+                  fill="#722F37"
+                  font-family="serif"
+                >
+                  &#9808;
+                </text>
+              </svg>
+            </div>
+          </div>
+
           <h1
             class="font-serif text-4xl sm:text-5xl text-wine font-bold leading-tight"
           >
             Happy Monthsary lovelove!
           </h1>
-          <p class="text-rosegold mt-3 text-lg font-light tracking-wide">
-            8th Month Together
-          </p>
-          <!-- Decorative divider -->
+          <!-- Decorative zodiac divider -->
           <div class="flex items-center justify-center gap-3 mt-6">
-            <div class="w-12 h-px bg-rose"></div>
+            <div class="w-8 h-px bg-rose"></div>
+            <span class="text-wine text-xs">&#9810;</span>
             <span class="text-rosegold text-xs">&#10084;</span>
-            <div class="w-12 h-px bg-rose"></div>
+            <span class="text-wine text-xs">&#9808;</span>
+            <div class="w-8 h-px bg-rose"></div>
           </div>
         </header>
 
         <!-- Letter body -->
-        <article
-          class="space-y-6 leading-relaxed text-gray-700 fade-in-up-delay-1"
-        >
-          <p class="font-serif text-xl text-wine italic">My Dearest Love,</p>
-
-          <p>
-            Eight months. It feels like we've shared a lifetime of laughter,
-            quiet moments, and all the little things that make
-            <span class="text-rosegold font-medium highlight-hover">us</span>
-            who we are. Every day with you is a gift I never want to stop
-            unwrapping.
-          </p>
-
-          <p>
-            I love the way you make the ordinary feel
-            <span class="text-rosegold font-medium highlight-hover"
-              >extraordinary</span
+        <!-- Letter body with zodiac side accents -->
+        <div class="relative">
+          <!-- Aquarius constellation accent (left side) -->
+          <div class="hidden sm:block absolute -left-16 top-8 opacity-20">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-10 h-10"
+              viewBox="0 0 40 40"
+              fill="none"
             >
-            &mdash; how a simple conversation with you turns into the highlight
-            of my day, how your smile can turn everything around, and how your
-            presence alone makes everything feel like home.
-          </p>
+              <text
+                x="20"
+                y="28"
+                text-anchor="middle"
+                font-size="24"
+                fill="#B76E79"
+                font-family="serif"
+              >
+                &#9810;
+              </text>
+            </svg>
+          </div>
+          <!-- Sagittarius constellation accent (right side) -->
+          <div class="hidden sm:block absolute -right-16 bottom-8 opacity-20">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-10 h-10"
+              viewBox="0 0 40 40"
+              fill="none"
+            >
+              <text
+                x="20"
+                y="28"
+                text-anchor="middle"
+                font-size="24"
+                fill="#B76E79"
+                font-family="serif"
+              >
+                &#9808;
+              </text>
+            </svg>
+          </div>
 
-          <p>
-            Thank you for choosing me, for staying, for being patient, and for
-            loving me in ways I never thought I deserved. You are my
-            <span class="text-wine font-semibold highlight-hover"
-              >favorite person</span
-            >, my safe place, and my greatest adventure.
-          </p>
+          <article
+            class="space-y-6 leading-relaxed text-gray-700 fade-in-up-delay-1"
+          >
+            <p class="font-serif text-xl text-wine italic">My Dearest Love,</p>
 
-          <p>
-            Here's to many more months, many more memories, and a love that only
-            grows deeper with time.
-          </p>
+            <p>
+              Eight months. It feels like we've shared a lifetime of laughter,
+              quiet moments, and all the little things that make
+              <span class="text-rosegold font-medium highlight-hover">us</span>
+              who we are. Every day with you is a gift I never want to stop
+              unwrapping.
+            </p>
 
-          <p class="pt-4">Forever and always yours,</p>
-        </article>
+            <p>
+              I love the way you make the ordinary feel
+              <span class="text-rosegold font-medium highlight-hover"
+                >extraordinary</span
+              >
+              &mdash; how a simple conversation with you turns into the
+              highlight of my day, how your smile can turn everything around,
+              and how your presence alone makes everything feel like home.
+            </p>
+
+            <p>
+              Thank you for choosing me, for staying, for being patient, and for
+              loving me in ways I never thought I deserved. You are my
+              <span class="text-wine font-semibold highlight-hover"
+                >favorite person</span
+              >, my safe place, and my greatest adventure.
+            </p>
+
+            <p>
+              Here's to many more months, many more memories, and a love that
+              only grows deeper with time.
+            </p>
+
+            <p class="pt-4">Forever and always yours,</p>
+          </article>
+        </div>
 
         <!-- Signature / closing -->
         <div class="mt-8 fade-in-up-delay-2">
@@ -359,15 +507,42 @@
           </p>
         </div>
 
-        <!-- Decorative bottom section -->
+        <!-- Decorative bottom section with zodiac ring -->
         <div class="mt-16 text-center fade-in-up-delay-3">
+          <!-- Zodiac constellation ring -->
+          <div class="flex items-center justify-center mb-4">
+            <div class="relative w-20 h-20">
+              <!-- Slowly rotating ring -->
+              <div
+                class="absolute inset-0 rounded-full border border-rose/30 slow-spin"
+              ></div>
+              <div
+                class="absolute inset-1 rounded-full border border-rosegold/20"
+              ></div>
+              <!-- Center heart -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-rosegold text-lg">&#10084;</span>
+              </div>
+              <!-- Aquarius at top -->
+              <div class="absolute -top-2 left-1/2 -translate-x-1/2">
+                <span class="text-wine text-xs bg-white px-1">&#9810;</span>
+              </div>
+              <!-- Sagittarius at bottom -->
+              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2">
+                <span class="text-wine text-xs bg-white px-1">&#9808;</span>
+              </div>
+            </div>
+          </div>
+
           <div class="flex items-center justify-center gap-3">
-            <div class="w-12 h-px bg-rose"></div>
-            <span class="text-rosegold text-sm">&#10087;</span>
-            <div class="w-12 h-px bg-rose"></div>
+            <div class="w-8 h-px bg-rose"></div>
+            <span class="text-wine text-xs">&#9810;</span>
+            <span class="text-rosegold text-xs">&times;</span>
+            <span class="text-wine text-xs">&#9808;</span>
+            <div class="w-8 h-px bg-rose"></div>
           </div>
           <p class="text-rose text-xs mt-4 tracking-widest uppercase">
-            8 months of love
+            &#9810; &times; &#9808;
           </p>
         </div>
       </div>
@@ -403,9 +578,18 @@
               class="text-wine hover:text-rosegold transition-colors duration-200"
               title="Volume Down"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                <line x1="23" y1="9" x2="23" y2="15" opacity="0"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <line x1="23" y1="9" x2="23" y2="15" opacity="0" />
               </svg>
             </button>
 
@@ -425,10 +609,19 @@
               class="text-wine hover:text-rosegold transition-colors duration-200"
               title="Volume Up"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
               </svg>
             </button>
 
@@ -439,12 +632,25 @@
               title="Play / Pause"
             >
               <!-- Play icon (shown when paused) -->
-              <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"/>
+              <svg
+                id="playIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 hidden"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <polygon points="5 3 19 12 5 21 5 3" />
               </svg>
               <!-- Pause icon (shown when playing) -->
-              <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+              <svg
+                id="pauseIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <rect x="6" y="4" width="4" height="16" />
+                <rect x="14" y="4" width="4" height="16" />
               </svg>
             </button>
           </div>
@@ -454,7 +660,10 @@
       <!-- Audio element — replace "song.mp3" with your music file -->
       <!-- Audio element — replace "song.mp3" with your music file -->
       <audio id="bgMusic" loop preload="auto">
-        <source src="audio/Kyle Raphael - Libu-libong Buwan (Uuwian) (Lyrics).mp3" type="audio/mpeg" />
+        <source
+          src="audio/Kyle Raphael - Libu-libong Buwan (Uuwian) (Lyrics).mp3"
+          type="audio/mpeg"
+        />
       </audio>
     </main>
 
@@ -551,12 +760,15 @@
             letterContent.classList.remove("hidden");
 
             // Auto-play music when the letter is revealed
-            bgMusic.play().then(() => {
-              updatePlayState();
-            }).catch(() => {
-              // Browser blocked autoplay; show play icon so user can start manually
-              updatePlayState();
-            });
+            bgMusic
+              .play()
+              .then(() => {
+                updatePlayState();
+              })
+              .catch(() => {
+                // Browser blocked autoplay; show play icon so user can start manually
+                updatePlayState();
+              });
 
             // Show the music player with a slight delay
             setTimeout(() => {
