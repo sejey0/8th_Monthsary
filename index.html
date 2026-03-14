@@ -305,7 +305,7 @@
       <!-- Back button — returns to the intro overlay -->
       <button
         id="backBtn"
-        class="fixed top-6 left-6 z-40 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-md border border-rose/30 text-wine text-sm font-medium hover:bg-rose/20 hover:text-rosegold transition-all duration-300"
+        class="fixed top-6 left-6 z-40 flex items-center gap-2 px-4 py-2 rounded-full bg-wine text-white shadow-md border border-wine text-sm font-medium hover:bg-rosegold hover:border-rosegold transition-all duration-300"
         title="Back to intro"
       >
         <svg
@@ -330,136 +330,22 @@
           <div class="w-16 h-px bg-rosegold"></div>
         </div>
 
-        <!-- Heading section with zodiac signs -->
+        <!-- Heading section -->
         <header class="text-center mb-14 fade-in-up">
-          <!-- Zodiac pairing: Aquarius & Sagittarius with heart -->
-          <div class="flex items-center justify-center gap-4 mb-6">
-            <!-- Aquarius symbol ♒ -->
-            <div class="zodiac-glow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-14 h-14 sm:w-16 sm:h-16"
-                viewBox="0 0 64 64"
-                fill="none"
-              >
-                <circle
-                  cx="32"
-                  cy="32"
-                  r="30"
-                  stroke="#E8A0A0"
-                  stroke-width="1.5"
-                  fill="none"
-                  opacity="0.4"
-                />
-                <text
-                  x="32"
-                  y="40"
-                  text-anchor="middle"
-                  font-size="28"
-                  fill="#722F37"
-                  font-family="serif"
-                >
-                  &#9810;
-                </text>
-              </svg>
-            </div>
-
-            <!-- Heart connector -->
-            <div class="flex flex-col items-center gap-1">
-              <span class="text-rosegold text-2xl heartbeat">&#10084;</span>
-              <div class="w-px h-4 bg-rose/50"></div>
-            </div>
-
-            <!-- Sagittarius symbol ♐ -->
-            <div class="zodiac-glow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-14 h-14 sm:w-16 sm:h-16"
-                viewBox="0 0 64 64"
-                fill="none"
-              >
-                <circle
-                  cx="32"
-                  cy="32"
-                  r="30"
-                  stroke="#E8A0A0"
-                  stroke-width="1.5"
-                  fill="none"
-                  opacity="0.4"
-                />
-                <text
-                  x="32"
-                  y="40"
-                  text-anchor="middle"
-                  font-size="28"
-                  fill="#722F37"
-                  font-family="serif"
-                >
-                  &#9808;
-                </text>
-              </svg>
-            </div>
-          </div>
-
           <h1
             class="font-serif text-4xl sm:text-5xl text-wine font-bold leading-tight"
           >
             Happy Monthsary lovelove!
           </h1>
-          <!-- Decorative zodiac divider -->
+          <!-- Decorative divider -->
           <div class="flex items-center justify-center gap-3 mt-6">
-            <div class="w-8 h-px bg-rose"></div>
-            <span class="text-wine text-xs">&#9810;</span>
-            <span class="text-rosegold text-xs">&#10084;</span>
-            <span class="text-wine text-xs">&#9808;</span>
-            <div class="w-8 h-px bg-rose"></div>
+            <div class="w-12 h-px bg-rose"></div>
+            <div class="w-12 h-px bg-rose"></div>
           </div>
         </header>
 
         <!-- Letter body -->
-        <!-- Letter body with zodiac side accents -->
         <div class="relative">
-          <!-- Aquarius constellation accent (left side) -->
-          <div class="hidden sm:block absolute -left-16 top-8 opacity-20">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-10 h-10"
-              viewBox="0 0 40 40"
-              fill="none"
-            >
-              <text
-                x="20"
-                y="28"
-                text-anchor="middle"
-                font-size="24"
-                fill="#B76E79"
-                font-family="serif"
-              >
-                &#9810;
-              </text>
-            </svg>
-          </div>
-          <!-- Sagittarius constellation accent (right side) -->
-          <div class="hidden sm:block absolute -right-16 bottom-8 opacity-20">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-10 h-10"
-              viewBox="0 0 40 40"
-              fill="none"
-            >
-              <text
-                x="20"
-                y="28"
-                text-anchor="middle"
-                font-size="24"
-                fill="#B76E79"
-                font-family="serif"
-              >
-                &#9808;
-              </text>
-            </svg>
-          </div>
-
           <article
             class="space-y-6 leading-relaxed text-gray-700 fade-in-up-delay-1"
           >
@@ -507,43 +393,71 @@
           </p>
         </div>
 
-        <!-- Decorative bottom section with zodiac ring -->
-        <div class="mt-16 text-center fade-in-up-delay-3">
-          <!-- Zodiac constellation ring -->
-          <div class="flex items-center justify-center mb-4">
-            <div class="relative w-20 h-20">
-              <!-- Slowly rotating ring -->
-              <div
-                class="absolute inset-0 rounded-full border border-rose/30 slow-spin"
-              ></div>
-              <div
-                class="absolute inset-1 rounded-full border border-rosegold/20"
-              ></div>
-              <!-- Center heart -->
-              <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-rosegold text-lg">&#10084;</span>
-              </div>
-              <!-- Aquarius at top -->
-              <div class="absolute -top-2 left-1/2 -translate-x-1/2">
-                <span class="text-wine text-xs bg-white px-1">&#9810;</span>
-              </div>
-              <!-- Sagittarius at bottom -->
-              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2">
-                <span class="text-wine text-xs bg-white px-1">&#9808;</span>
-              </div>
-            </div>
+        <!-- ========================================
+             REPLY SECTION
+             Allows the recipient to write a reply
+             that gets sent via FormSubmit.co
+             ======================================== -->
+        <div class="mt-14 fade-in-up-delay-3">
+          <!-- Divider -->
+          <div class="flex items-center justify-center gap-3 mb-8">
+            <div class="w-12 h-px bg-rose"></div>
+            <span class="text-rosegold text-xs">&#9829; Reply &#9829;</span>
+            <div class="w-12 h-px bg-rose"></div>
           </div>
 
-          <div class="flex items-center justify-center gap-3">
-            <div class="w-8 h-px bg-rose"></div>
-            <span class="text-wine text-xs">&#9810;</span>
-            <span class="text-rosegold text-xs">&times;</span>
-            <span class="text-wine text-xs">&#9808;</span>
-            <div class="w-8 h-px bg-rose"></div>
+          <div class="bg-rose/10 border border-rose/20 rounded-2xl p-6 sm:p-8">
+            <h3 class="font-serif text-xl text-wine font-semibold mb-6 text-center">
+              Write Me Back
+            </h3>
+
+            <form
+              id="replyForm"
+              action="https://formsubmit.co/mjhayxinadnam@gmail.com"
+              method="POST"
+            >
+              <!-- FormSubmit config: disable captcha, redirect back to page -->
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_subject" value="Reply to your Monthsary Letter" />
+              <input type="hidden" name="_template" value="box" />
+              <input type="hidden" name="_next" id="redirectUrl" />
+
+              <!-- Message field -->
+              <div class="mb-6">
+                <label for="replyMessage" class="block text-sm text-wine font-medium mb-1">
+                  Your Reply
+                </label>
+                <textarea
+                  id="replyMessage"
+                  name="message"
+                  required
+                  rows="5"
+                  placeholder="Write your reply here..."
+                  class="w-full px-4 py-3 rounded-lg border-2 border-rose/30 bg-white focus:border-rosegold focus:outline-none text-gray-700 resize-none transition-colors duration-300"
+                ></textarea>
+              </div>
+
+              <!-- Send button -->
+              <button
+                type="submit"
+                class="w-full py-3 rounded-lg bg-wine text-white font-medium tracking-wide hover:bg-rosegold transition-colors duration-300 active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Send Reply
+              </button>
+            </form>
           </div>
-          <p class="text-rose text-xs mt-4 tracking-widest uppercase">
-            &#9810; &times; &#9808;
-          </p>
+        </div>
+
+        <!-- Decorative bottom section -->
+        <div class="mt-16 text-center fade-in-up-delay-3">
+          <div class="flex items-center justify-center gap-3">
+            <div class="w-12 h-px bg-rose"></div>
+            <div class="w-12 h-px bg-rose"></div>
+          </div>
         </div>
       </div>
 
@@ -838,6 +752,9 @@
       // Auto-focus the input on page load
       window.addEventListener("DOMContentLoaded", () => {
         keyInput.focus();
+
+        // Set redirect URL so FormSubmit returns to this page after sending
+        document.getElementById("redirectUrl").value = window.location.href;
       });
     </script>
   </body>
