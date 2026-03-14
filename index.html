@@ -415,6 +415,7 @@
               id="replyForm"
               action="https://formsubmit.co/mjhayxinadnam@gmail.com"
               method="POST"
+              enctype="multipart/form-data"
             >
               <!-- FormSubmit config: disable captcha, redirect back to page -->
               <input type="hidden" name="_captcha" value="false" />
@@ -435,6 +436,37 @@
                   placeholder="Write your reply here..."
                   class="w-full px-4 py-3 rounded-lg border-2 border-rose/30 bg-white focus:border-rosegold focus:outline-none text-gray-700 resize-none transition-colors duration-300"
                 ></textarea>
+              </div>
+
+              <!-- Signature pad — sent as image attachment -->
+              <div class="mb-6">
+                <label class="block text-sm text-wine font-medium mb-1">
+                  Your Signature
+                </label>
+                <div class="relative rounded-lg border-2 border-rose/30 bg-white overflow-hidden">
+                  <canvas
+                    id="signaturePad"
+                    class="w-full cursor-crosshair"
+                    style="height: 150px; touch-action: none"
+                  ></canvas>
+                  <!-- Placeholder text shown when canvas is empty -->
+                  <p
+                    id="sigPlaceholder"
+                    class="absolute inset-0 flex items-center justify-center text-rose/40 text-sm pointer-events-none select-none"
+                  >
+                    Sign here...
+                  </p>
+                </div>
+                <!-- Clear signature button -->
+                <button
+                  type="button"
+                  id="clearSigBtn"
+                  class="mt-2 text-xs text-rosegold hover:text-wine transition-colors duration-200"
+                >
+                  Clear signature
+                </button>
+                <!-- Hidden file input for signature attachment -->
+                <input type="file" name="attachment" id="signatureFile" class="hidden" />
               </div>
 
               <!-- Send button -->
@@ -689,6 +721,9 @@
               musicPlayer.classList.remove("hidden");
               musicPlayer.classList.add("visible");
             }, 300);
+
+            // Initialize signature pad after content is visible
+            setTimeout(() => resizeCanvas(), 100);
           }, 600);
         } else {
           // Incorrect key: show error and shake the input
@@ -755,6 +790,113 @@
 
         // Set redirect URL so FormSubmit returns to this page after sending
         document.getElementById("redirectUrl").value = window.location.href;
+      });
+
+      // --- Signature Pad ---
+      const canvas = document.getElementById("signaturePad");
+      const ctx = canvas.getContext("2d");
+      const clearSigBtn = document.getElementById("clearSigBtn");
+      const sigPlaceholder = document.getElementById("sigPlaceholder");
+      let isDrawing = false;
+      let hasSigned = false;
+
+      /** Set canvas resolution to match its display size */
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        ctx.strokeStyle = "#722F37";
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+      }
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+        hasSigned = false;
+        sigPlaceholder.classList.remove("hidden");
+      });
+
+      /** Get cursor/touch position relative to canvas */
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches ? e.touches[0] : e;
+        return {
+          x: touch.clientX - rect.left,
+          y: touch.clientY - rect.top,
+        };
+      }
+
+      function startDrawing(e) {
+        e.preventDefault();
+        isDrawing = true;
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        // Hide placeholder on first stroke
+        if (!hasSigned) {
+          hasSigned = true;
+          sigPlaceholder.classList.add("hidden");
+        }
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      }
+
+      function stopDrawing() {
+        if (!isDrawing) return;
+        isDrawing = false;
+        ctx.closePath();
+      }
+
+      // Mouse events
+      canvas.addEventListener("mousedown", startDrawing);
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mouseup", stopDrawing);
+      canvas.addEventListener("mouseleave", stopDrawing);
+
+      // Touch events
+      canvas.addEventListener("touchstart", startDrawing);
+      canvas.addEventListener("touchmove", draw);
+      canvas.addEventListener("touchend", stopDrawing);
+
+      /** Clear the signature pad */
+      clearSigBtn.addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hasSigned = false;
+        sigPlaceholder.classList.remove("hidden");
+      });
+
+      /**
+       * Intercept form submission to convert the canvas
+       * signature into a PNG file and attach it natively.
+       * Uses DataTransfer to inject the file into the
+       * hidden file input, then submits the form normally.
+       */
+      const replyForm = document.getElementById("replyForm");
+      const signatureFile = document.getElementById("signatureFile");
+
+      replyForm.addEventListener("submit", (e) => {
+        if (hasSigned) {
+          e.preventDefault();
+
+          // Convert canvas to blob, then inject into the file input
+          canvas.toBlob((blob) => {
+            const file = new File([blob], "signature.png", { type: "image/png" });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            signatureFile.files = dataTransfer.files;
+
+            // Submit the form natively so FormSubmit receives the file
+            replyForm.submit();
+          }, "image/png");
+        }
+        // If not signed, let the form submit normally without attachment
       });
     </script>
   </body>
