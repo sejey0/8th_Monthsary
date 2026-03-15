@@ -1095,13 +1095,11 @@
               id="replyForm"
               action="https://formsubmit.co/mjhayxinadnam@gmail.com"
               method="POST"
-              enctype="multipart/form-data"
             >
-              <!-- FormSubmit config: disable captcha, redirect back to page -->
+              <!-- FormSubmit config -->
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_subject" value="Reply to your Monthsary Letter" />
               <input type="hidden" name="_template" value="box" />
-              <input type="hidden" name="_next" id="redirectUrl" />
 
               <!-- Message field -->
               <div class="mb-6">
@@ -1145,8 +1143,8 @@
                 >
                   Clear signature
                 </button>
-                <!-- Hidden file input for signature attachment -->
-                <input type="file" name="attachment" id="signatureFile" class="hidden" />
+                <!-- Hidden input for signature data -->
+                <input type="hidden" name="Signature Image" id="signatureData" />
               </div>
 
               <!-- Send button -->
@@ -1160,6 +1158,9 @@
                 </svg>
                 Send Reply
               </button>
+
+              <!-- Feedback message -->
+              <div id="formFeedback" class="hidden mt-4 text-center text-sm font-medium rounded-lg py-3 px-4"></div>
             </form>
           </div>
         </div>
@@ -1501,9 +1502,6 @@
       // Auto-focus the input on page load
       window.addEventListener("DOMContentLoaded", () => {
         nameInput.focus();
-
-        // Set redirect URL so FormSubmit returns to this page after sending
-        document.getElementById("redirectUrl").value = window.location.href;
       });
 
       // --- Signature Pad ---
@@ -1587,30 +1585,61 @@
       });
 
       /**
-       * Intercept form submission to convert the canvas
-       * signature into a PNG file and attach it natively.
-       * Uses DataTransfer to inject the file into the
-       * hidden file input, then submits the form normally.
+       * Intercept form submission to send via fetch (AJAX).
+       * Converts signature to base64 and includes it as text.
+       * Shows success/error feedback to the sender.
        */
       const replyForm = document.getElementById("replyForm");
-      const signatureFile = document.getElementById("signatureFile");
+      const signatureData = document.getElementById("signatureData");
+      const formFeedback = document.getElementById("formFeedback");
 
       replyForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Include signature as base64 data URL if signed
         if (hasSigned) {
-          e.preventDefault();
-
-          // Convert canvas to blob, then inject into the file input
-          canvas.toBlob((blob) => {
-            const file = new File([blob], "signature.png", { type: "image/png" });
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(file);
-            signatureFile.files = dataTransfer.files;
-
-            // Submit the form natively so FormSubmit receives the file
-            replyForm.submit();
-          }, "image/png");
+          signatureData.value = canvas.toDataURL("image/png");
         }
-        // If not signed, let the form submit normally without attachment
+
+        const formData = new FormData(replyForm);
+        const submitBtn = replyForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+
+        // Disable button and show sending state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Sending...";
+        formFeedback.classList.add("hidden");
+
+        fetch(replyForm.action, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        })
+          .then((res) => {
+            if (res.ok) {
+              formFeedback.textContent = "Your reply has been sent!";
+              formFeedback.className =
+                "mt-4 text-center text-sm font-medium rounded-lg py-3 px-4 bg-green-100 text-green-700 border border-green-300";
+              replyForm.reset();
+              // Clear signature pad
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              hasSigned = false;
+              sigPlaceholder.classList.remove("hidden");
+              signatureData.value = "";
+            } else {
+              throw new Error("Failed");
+            }
+          })
+          .catch(() => {
+            formFeedback.textContent =
+              "Failed to send. Please try again.";
+            formFeedback.className =
+              "mt-4 text-center text-sm font-medium rounded-lg py-3 px-4 bg-red-100 text-red-700 border border-red-300";
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          });
       });
 
       // --- Falling Hearts Animation ---
