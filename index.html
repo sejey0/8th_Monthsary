@@ -537,6 +537,87 @@
         animation: confettiFall ease-out forwards;
       }
 
+      /* Overlay floating hearts */
+      @keyframes overlayFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.15; }
+        50% { transform: translateY(-30px) rotate(15deg); opacity: 0.3; }
+      }
+      .overlay-heart {
+        position: absolute;
+        pointer-events: none;
+        animation: overlayFloat ease-in-out infinite;
+      }
+
+      /* Overlay sparkle dots */
+      @keyframes overlaySparkle {
+        0%, 100% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 0.6; transform: scale(1); }
+      }
+      .overlay-sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        pointer-events: none;
+        animation: overlaySparkle ease-in-out infinite;
+      }
+
+      /* Overlay blurred orbs */
+      .overlay-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        pointer-events: none;
+        opacity: 0.15;
+      }
+
+      /* Overlay card shimmer border */
+      @keyframes borderShimmer {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .overlay-card {
+        position: relative;
+      }
+      .overlay-card::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 18px;
+        background: linear-gradient(90deg, #E8A0A0, #FFB6C1, #B76E79, #FFC0CB, #E8A0A0);
+        background-size: 300% 100%;
+        animation: borderShimmer 5s ease-in-out infinite;
+        z-index: -1;
+      }
+
+      /* Keyhole icon pulse */
+      @keyframes keyholeGlow {
+        0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 182, 193, 0.4)); }
+        50% { filter: drop-shadow(0 0 16px rgba(255, 182, 193, 0.8)); }
+      }
+      .keyhole-glow {
+        animation: keyholeGlow 2.5s ease-in-out infinite;
+      }
+
+      /* Overlay wave decoration */
+      .overlay-wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        opacity: 0.1;
+      }
+
+      /* Overlay corner roses */
+      .overlay-corner-rose {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0.12;
+      }
+
       @media (min-width: 640px) {
         .letter-frame {
           padding: 48px 44px;
@@ -552,7 +633,7 @@
        ======================================== -->
     <div
       id="overlay"
-      class="fixed inset-0 z-50 flex items-center justify-center"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
       style="
         background: linear-gradient(
           135deg,
@@ -562,16 +643,108 @@
         );
       "
     >
+      <!-- Blurred pink orbs in background -->
+      <div class="overlay-orb" style="width: 250px; height: 250px; background: #FFB6C1; top: -5%; left: -5%;"></div>
+      <div class="overlay-orb" style="width: 200px; height: 200px; background: #FFC0CB; bottom: 10%; right: -5%;"></div>
+      <div class="overlay-orb" style="width: 180px; height: 180px; background: #E8A0A0; top: 50%; left: 60%;"></div>
+      <div class="overlay-orb" style="width: 150px; height: 150px; background: #f8b4c8; top: 20%; right: 20%;"></div>
+
+      <!-- Floating hearts scattered in overlay -->
+      <div class="overlay-heart" style="top: 8%; left: 10%; font-size: 24px; color: rgba(255,182,193,0.3); animation-duration: 5s;">&#9829;</div>
+      <div class="overlay-heart" style="top: 18%; right: 15%; font-size: 18px; color: rgba(255,192,203,0.25); animation-duration: 7s; animation-delay: 1s;">&#9825;</div>
+      <div class="overlay-heart" style="bottom: 20%; left: 8%; font-size: 28px; color: rgba(248,180,200,0.2); animation-duration: 6s; animation-delay: 2s;">&#10084;</div>
+      <div class="overlay-heart" style="bottom: 12%; right: 10%; font-size: 20px; color: rgba(255,182,193,0.3); animation-duration: 8s; animation-delay: 0.5s;">&#9829;</div>
+      <div class="overlay-heart" style="top: 45%; left: 5%; font-size: 16px; color: rgba(255,209,220,0.25); animation-duration: 9s; animation-delay: 3s;">&#9825;</div>
+      <div class="overlay-heart" style="top: 60%; right: 8%; font-size: 22px; color: rgba(232,160,160,0.2); animation-duration: 6.5s; animation-delay: 1.5s;">&#9829;</div>
+      <div class="overlay-heart" style="top: 30%; left: 80%; font-size: 14px; color: rgba(255,182,193,0.3); animation-duration: 7.5s; animation-delay: 4s;">&#10084;</div>
+      <div class="overlay-heart" style="bottom: 35%; left: 20%; font-size: 25px; color: rgba(251,182,206,0.2); animation-duration: 5.5s; animation-delay: 2.5s;">&#9825;</div>
+
+      <!-- Sparkle dots scattered across overlay -->
+      <div class="overlay-sparkle" style="top: 12%; left: 25%; animation-duration: 3s;"></div>
+      <div class="overlay-sparkle" style="top: 30%; right: 20%; animation-duration: 4s; animation-delay: 1s;"></div>
+      <div class="overlay-sparkle" style="bottom: 25%; left: 35%; animation-duration: 3.5s; animation-delay: 2s;"></div>
+      <div class="overlay-sparkle" style="top: 55%; left: 15%; animation-duration: 4.5s; animation-delay: 0.5s;"></div>
+      <div class="overlay-sparkle" style="bottom: 40%; right: 30%; animation-duration: 3s; animation-delay: 1.5s;"></div>
+      <div class="overlay-sparkle" style="top: 20%; left: 60%; animation-duration: 5s; animation-delay: 3s;"></div>
+      <div class="overlay-sparkle" style="bottom: 15%; right: 45%; animation-duration: 3.8s; animation-delay: 2.5s;"></div>
+      <div class="overlay-sparkle" style="top: 70%; left: 45%; animation-duration: 4.2s; animation-delay: 1.8s;"></div>
+      <div class="overlay-sparkle" style="top: 40%; right: 5%; animation-duration: 3.2s; animation-delay: 0.8s; width: 6px; height: 6px;"></div>
+      <div class="overlay-sparkle" style="bottom: 8%; left: 50%; animation-duration: 4.8s; animation-delay: 3.5s; width: 5px; height: 5px;"></div>
+
+      <!-- Corner rose SVG ornaments -->
+      <div class="overlay-corner-rose" style="top: 10px; left: 10px;">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 5 C20 8, 35 25, 30 50 C28 65, 15 75, 8 90" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+          <path d="M5 5 C12 18, 22 20, 40 18 C55 16, 65 22, 75 15" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+          <circle cx="30" cy="50" r="3" fill="#FFC0CB" opacity="0.5"/>
+          <circle cx="40" cy="18" r="2.5" fill="#FFC0CB" opacity="0.4"/>
+          <path d="M25 45 C22 40, 25 34, 30 37 C34 34, 37 40, 34 45 C32 48, 27 48, 25 45Z" fill="#FFB6C1" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="overlay-corner-rose" style="top: 10px; right: 10px; transform: scaleX(-1);">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 5 C20 8, 35 25, 30 50 C28 65, 15 75, 8 90" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+          <path d="M5 5 C12 18, 22 20, 40 18 C55 16, 65 22, 75 15" stroke="#FFB6C1" stroke-width="1.5" fill="none"/>
+          <circle cx="30" cy="50" r="3" fill="#FFC0CB" opacity="0.5"/>
+          <circle cx="40" cy="18" r="2.5" fill="#FFC0CB" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="overlay-corner-rose" style="bottom: 10px; left: 10px; transform: scaleY(-1);">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 5 C20 8, 35 25, 30 50 C28 65, 15 75, 8 90" stroke="#f8b4c8" stroke-width="1.5" fill="none"/>
+          <path d="M5 5 C12 18, 22 20, 40 18 C55 16, 65 22, 75 15" stroke="#f8b4c8" stroke-width="1.5" fill="none"/>
+          <circle cx="30" cy="50" r="3" fill="#fbb6ce" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="overlay-corner-rose" style="bottom: 10px; right: 10px; transform: scale(-1, -1);">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 5 C20 8, 35 25, 30 50 C28 65, 15 75, 8 90" stroke="#f8b4c8" stroke-width="1.5" fill="none"/>
+          <path d="M5 5 C12 18, 22 20, 40 18 C55 16, 65 22, 75 15" stroke="#f8b4c8" stroke-width="1.5" fill="none"/>
+          <circle cx="30" cy="50" r="3" fill="#fbb6ce" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- Wave decoration at the bottom of overlay -->
+      <div class="overlay-wave">
+        <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:60px;">
+          <path d="M0 50 C240 10, 480 90, 720 50 C960 10, 1200 90, 1440 50 L1440 100 L0 100Z" fill="rgba(255,182,193,0.3)"/>
+          <path d="M0 65 C300 30, 600 80, 900 55 C1100 35, 1300 75, 1440 60 L1440 100 L0 100Z" fill="rgba(255,192,203,0.2)"/>
+        </svg>
+      </div>
+
+      <!-- Overlay card with shimmer border -->
       <div
-        class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 sm:p-12 mx-4 max-w-md w-full text-center"
+        class="overlay-card bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 sm:p-12 mx-4 max-w-md w-full text-center relative z-10"
       >
-        <!-- Heart icon on the overlay -->
-        <div class="text-5xl mb-4 heartbeat">&#10084;</div>
+        <!-- Decorative pink line at top of card -->
+        <div class="flex justify-center mb-4">
+          <div class="w-20 h-0.5 rounded-full" style="background: linear-gradient(90deg, transparent, #FFB6C1, #B76E79, #FFB6C1, transparent);"></div>
+        </div>
+
+        <!-- Lock/Heart icon with keyhole glow -->
+        <div class="keyhole-glow inline-block mb-3">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Heart shape -->
+            <path d="M28 48 C28 48, 6 34, 6 20 C6 12, 12 6, 20 6 C24 6, 28 10, 28 10 C28 10, 32 6, 36 6 C44 6, 50 12, 50 20 C50 34, 28 48, 28 48Z" fill="#722F37"/>
+            <!-- Keyhole -->
+            <circle cx="28" cy="22" r="5" fill="white" opacity="0.9"/>
+            <rect x="26" y="25" width="4" height="8" rx="1" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+
         <h2
           class="font-serif text-2xl sm:text-3xl text-wine font-semibold mb-2"
         >
           A Letter For You
         </h2>
+
+        <!-- Small decorative heart divider -->
+        <div class="flex items-center justify-center gap-2 mb-6">
+          <div class="w-8 h-px" style="background: linear-gradient(90deg, transparent, #E8A0A0);"></div>
+          <span class="text-xs" style="color: #FFB6C1;">&#9829;</span>
+          <div class="w-8 h-px" style="background: linear-gradient(90deg, #E8A0A0, transparent);"></div>
+        </div>
+
         <p class="text-rosegold text-sm mb-8">
           Enter the key to unlock this letter
         </p>
@@ -592,13 +765,22 @@
           Incorrect key. Please try again.
         </p>
 
-        <!-- Submit button -->
+        <!-- Submit button with heart icon -->
         <button
           id="submitBtn"
-          class="mt-6 w-full py-3 rounded-lg bg-wine text-white font-medium tracking-wide hover:bg-rosegold transition-colors duration-300 active:scale-[0.98]"
+          class="mt-6 w-full py-3 rounded-lg bg-wine text-white font-medium tracking-wide hover:bg-rosegold transition-colors duration-300 active:scale-[0.98] flex items-center justify-center gap-2"
         >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
           Unlock
         </button>
+
+        <!-- Decorative pink line at bottom of card -->
+        <div class="flex justify-center mt-6">
+          <div class="w-20 h-0.5 rounded-full" style="background: linear-gradient(90deg, transparent, #FFB6C1, #B76E79, #FFB6C1, transparent);"></div>
+        </div>
       </div>
     </div>
 
