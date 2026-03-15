@@ -236,6 +236,312 @@
       .slow-spin {
         animation: slowSpin 30s linear infinite;
       }
+
+      /* Falling hearts/petals animation */
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      @keyframes sway {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(30px); }
+      }
+      .falling-particle {
+        position: fixed;
+        top: -5vh;
+        pointer-events: none;
+        z-index: 1;
+        animation: fall linear infinite;
+      }
+      .falling-particle span {
+        display: inline-block;
+        animation: sway ease-in-out infinite;
+      }
+
+      /* Decorative background blobs */
+      .bg-blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Soft radial glow behind the letter */
+      .letter-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(232,160,160,0.15) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Dotted border pattern */
+      .dot-pattern {
+        background-image: radial-gradient(circle, #E8A0A0 0.8px, transparent 0.8px);
+        background-size: 24px 24px;
+        opacity: 0.08;
+      }
+
+      /* Sparkle twinkle animation */
+      @keyframes twinkle {
+        0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+        50% { opacity: 1; transform: scale(1) rotate(180deg); }
+      }
+      .sparkle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 1;
+        animation: twinkle ease-in-out infinite;
+      }
+
+      /* Floating ring animation */
+      @keyframes floatRing {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        25% { transform: translateY(-15px) rotate(5deg); }
+        75% { transform: translateY(10px) rotate(-5deg); }
+      }
+      .floating-ring {
+        position: fixed;
+        border-radius: 50%;
+        border: 1px solid;
+        pointer-events: none;
+        z-index: 0;
+        animation: floatRing ease-in-out infinite;
+      }
+
+      /* Pink vignette — soft pink glow around edges */
+      .pink-vignette {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(ellipse at center, transparent 50%, rgba(252, 228, 228, 0.5) 100%);
+      }
+
+      /* Watercolor splash */
+      .watercolor-splash {
+        position: fixed;
+        border-radius: 50% 40% 55% 45% / 45% 50% 40% 55%;
+        filter: blur(50px);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.1;
+      }
+
+      /* Floating petal animation */
+      @keyframes floatPetal {
+        0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+        25% { transform: translateY(-12px) rotate(15deg) scale(1.05); }
+        50% { transform: translateY(-5px) rotate(-10deg) scale(0.95); }
+        75% { transform: translateY(-18px) rotate(8deg) scale(1.02); }
+      }
+      .floating-petal {
+        position: fixed;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.15;
+        animation: floatPetal ease-in-out infinite;
+      }
+
+      /* Pink wave at bottom */
+      .pink-wave {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.15;
+      }
+
+      /* Soft pink gradient orb */
+      .pink-orb {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(60px);
+      }
+
+      /* Diagonal line pattern */
+      .line-pattern {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.03;
+        background-image: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 40px,
+          #B76E79 40px,
+          #B76E79 41px
+        );
+      }
+
+      /* Corner vine ornament */
+      .corner-ornament {
+        position: fixed;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.12;
+      }
+
+      /* Letter frame with double border and corner flourishes */
+      .letter-frame {
+        position: relative;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(183, 110, 121, 0.25);
+        border-radius: 16px;
+        padding: 40px 32px;
+        box-shadow:
+          0 4px 30px rgba(183, 110, 121, 0.08),
+          inset 0 0 60px rgba(232, 160, 160, 0.05);
+      }
+      .letter-frame::before {
+        content: '';
+        position: absolute;
+        inset: 6px;
+        border: 1px solid rgba(232, 160, 160, 0.3);
+        border-radius: 12px;
+        pointer-events: none;
+      }
+      .letter-frame::after {
+        content: '';
+        position: absolute;
+        inset: 12px;
+        border: 1px dashed rgba(183, 110, 121, 0.12);
+        border-radius: 8px;
+        pointer-events: none;
+      }
+      /* Frame corner flourishes */
+      .frame-corner {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .frame-corner--tl { top: -4px; left: -4px; }
+      .frame-corner--tr { top: -4px; right: -4px; transform: scaleX(-1); }
+      .frame-corner--bl { bottom: -4px; left: -4px; transform: scaleY(-1); }
+      .frame-corner--br { bottom: -4px; right: -4px; transform: scale(-1); }
+
+      /* Pink heart cursor trail */
+      .cursor-heart {
+        position: fixed;
+        pointer-events: none;
+        z-index: 99;
+        font-size: 16px;
+        animation: cursorHeartFade 1s ease-out forwards;
+      }
+      @keyframes cursorHeartFade {
+        0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+        100% { opacity: 0; transform: translateY(-40px) scale(0.3) rotate(30deg); }
+      }
+
+      /* Shimmer text animation */
+      @keyframes shimmer {
+        0% { background-position: -200% center; }
+        100% { background-position: 200% center; }
+      }
+      .shimmer-text {
+        background: linear-gradient(
+          90deg,
+          #722F37 0%,
+          #B76E79 25%,
+          #FFB6C1 50%,
+          #B76E79 75%,
+          #722F37 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s ease-in-out infinite;
+      }
+
+      /* Floating pink bubbles */
+      @keyframes riseBubble {
+        0% { transform: translateY(100vh) scale(0); opacity: 0; }
+        10% { opacity: 0.6; transform: translateY(90vh) scale(1); }
+        90% { opacity: 0.4; }
+        100% { transform: translateY(-10vh) scale(0.6); opacity: 0; }
+      }
+      .pink-bubble {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        animation: riseBubble linear infinite;
+      }
+
+      /* Pink lace top & bottom borders */
+      .lace-border {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        pointer-events: none;
+        z-index: 2;
+        opacity: 0.15;
+      }
+      .lace-border--top { top: 0; }
+      .lace-border--bottom { bottom: 0; transform: scaleY(-1); }
+
+      /* Pulsing heart glow behind letter */
+      @keyframes heartGlow {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.08; }
+        50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.15; }
+      }
+      .heart-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+        animation: heartGlow 4s ease-in-out infinite;
+      }
+
+      /* Pink confetti */
+      @keyframes confettiFall {
+        0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(720deg) scale(0.5); opacity: 0; }
+      }
+      .confetti-piece {
+        position: fixed;
+        top: -10px;
+        pointer-events: none;
+        z-index: 55;
+        animation: confettiFall ease-out forwards;
+      }
+
+      @media (min-width: 640px) {
+        .letter-frame {
+          padding: 48px 44px;
+        }
+      }
     </style>
   </head>
   <body class="bg-white font-sans text-gray-800 min-h-screen">
@@ -301,7 +607,159 @@
        Hidden initially; revealed after correct
        key entry with fade-in animations.
        ======================================== -->
-    <main id="letterContent" class="hidden">
+    <main id="letterContent" class="hidden relative min-h-screen" style="background: linear-gradient(180deg, #fff 0%, #fef0f3 15%, #fce4ec 35%, #fdd5e1 50%, #fce4ec 65%, #fef0f3 85%, #fff 100%);">
+
+      <!-- ========================================
+           BACKGROUND DECORATIONS
+           Soft blobs, dot pattern, and falling
+           particles for a romantic atmosphere.
+           ======================================== -->
+
+      <!-- Full-page dot pattern overlay -->
+      <div class="dot-pattern fixed inset-0 z-0"></div>
+
+      <!-- Decorative gradient blobs -->
+      <div class="bg-blob" style="width: 300px; height: 300px; background: #E8A0A0; top: 10%; left: -5%;"></div>
+      <div class="bg-blob" style="width: 250px; height: 250px; background: #B76E79; top: 40%; right: -8%;"></div>
+      <div class="bg-blob" style="width: 200px; height: 200px; background: #722F37; bottom: 15%; left: 10%;"></div>
+      <div class="bg-blob" style="width: 180px; height: 180px; background: #E8A0A0; bottom: 5%; right: 15%;"></div>
+      <!-- Light pink blobs -->
+      <div class="bg-blob" style="width: 280px; height: 280px; background: #FFB6C1; top: 25%; left: 30%; opacity: 0.1;"></div>
+      <div class="bg-blob" style="width: 220px; height: 220px; background: #FFC0CB; top: 65%; right: 20%; opacity: 0.14;"></div>
+      <div class="bg-blob" style="width: 260px; height: 260px; background: #FFD1DC; bottom: 35%; left: -3%; opacity: 0.12;"></div>
+
+      <!-- Falling hearts container (populated by JS) -->
+      <div id="fallingHearts"></div>
+
+      <!-- Diagonal line pattern overlay -->
+      <div class="line-pattern"></div>
+
+      <!-- Floating decorative rings -->
+      <div class="floating-ring" style="width: 80px; height: 80px; border-color: rgba(232,160,160,0.2); top: 15%; right: 12%; animation-duration: 8s;"></div>
+      <div class="floating-ring" style="width: 50px; height: 50px; border-color: rgba(183,110,121,0.15); top: 60%; left: 8%; animation-duration: 10s; animation-delay: 2s;"></div>
+      <div class="floating-ring" style="width: 120px; height: 120px; border-color: rgba(114,47,55,0.08); bottom: 25%; right: 5%; animation-duration: 12s; animation-delay: 4s;"></div>
+      <div class="floating-ring" style="width: 35px; height: 35px; border-color: rgba(232,160,160,0.25); top: 35%; left: 15%; animation-duration: 7s; animation-delay: 1s;"></div>
+      <!-- Light pink rings -->
+      <div class="floating-ring" style="width: 60px; height: 60px; border-color: rgba(255,182,193,0.2); top: 80%; left: 20%; animation-duration: 9s; animation-delay: 3s;"></div>
+      <div class="floating-ring" style="width: 45px; height: 45px; border-color: rgba(255,192,203,0.22); top: 10%; right: 30%; animation-duration: 11s; animation-delay: 5s;"></div>
+      <div class="floating-ring" style="width: 90px; height: 90px; border-color: rgba(248,180,200,0.15); top: 50%; left: 50%; animation-duration: 13s; animation-delay: 2s;"></div>
+
+      <!-- Corner vine ornaments -->
+      <!-- Top-left corner -->
+      <div class="corner-ornament" style="top: 0; left: 0;">
+        <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C30 10, 50 40, 40 80 C35 100, 20 110, 10 130" stroke="#B76E79" stroke-width="1.5" fill="none"/>
+          <path d="M0 0 C15 25, 30 30, 60 25 C80 22, 95 30, 110 20" stroke="#B76E79" stroke-width="1.5" fill="none"/>
+          <circle cx="40" cy="80" r="4" fill="#E8A0A0" opacity="0.5"/>
+          <circle cx="60" cy="25" r="3" fill="#E8A0A0" opacity="0.5"/>
+          <circle cx="10" cy="130" r="3" fill="#E8A0A0" opacity="0.4"/>
+          <circle cx="110" cy="20" r="3" fill="#E8A0A0" opacity="0.4"/>
+          <path d="M35 75 C30 70, 35 60, 42 65 C48 60, 53 70, 48 75 C45 80, 38 80, 35 75Z" fill="#E8A0A0" opacity="0.3"/>
+          <path d="M55 20 C52 16, 55 10, 60 13 C64 10, 67 16, 64 20 C62 23, 57 23, 55 20Z" fill="#E8A0A0" opacity="0.3"/>
+        </svg>
+      </div>
+
+      <!-- Top-right corner -->
+      <div class="corner-ornament" style="top: 0; right: 0; transform: scaleX(-1);">
+        <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C30 10, 50 40, 40 80 C35 100, 20 110, 10 130" stroke="#B76E79" stroke-width="1.5" fill="none"/>
+          <path d="M0 0 C15 25, 30 30, 60 25 C80 22, 95 30, 110 20" stroke="#B76E79" stroke-width="1.5" fill="none"/>
+          <circle cx="40" cy="80" r="4" fill="#E8A0A0" opacity="0.5"/>
+          <circle cx="60" cy="25" r="3" fill="#E8A0A0" opacity="0.5"/>
+          <circle cx="10" cy="130" r="3" fill="#E8A0A0" opacity="0.4"/>
+          <circle cx="110" cy="20" r="3" fill="#E8A0A0" opacity="0.4"/>
+          <path d="M35 75 C30 70, 35 60, 42 65 C48 60, 53 70, 48 75 C45 80, 38 80, 35 75Z" fill="#E8A0A0" opacity="0.3"/>
+        </svg>
+      </div>
+
+      <!-- Bottom-left corner -->
+      <div class="corner-ornament" style="bottom: 0; left: 0; transform: scaleY(-1);">
+        <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C30 10, 50 40, 40 80 C35 100, 20 110, 10 130" stroke="#722F37" stroke-width="1.5" fill="none"/>
+          <path d="M0 0 C15 25, 30 30, 60 25 C80 22, 95 30, 110 20" stroke="#722F37" stroke-width="1.5" fill="none"/>
+          <circle cx="40" cy="80" r="4" fill="#B76E79" opacity="0.4"/>
+          <circle cx="60" cy="25" r="3" fill="#B76E79" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- Bottom-right corner -->
+      <div class="corner-ornament" style="bottom: 0; right: 0; transform: scale(-1, -1);">
+        <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 C30 10, 50 40, 40 80 C35 100, 20 110, 10 130" stroke="#722F37" stroke-width="1.5" fill="none"/>
+          <path d="M0 0 C15 25, 30 30, 60 25 C80 22, 95 30, 110 20" stroke="#722F37" stroke-width="1.5" fill="none"/>
+          <circle cx="40" cy="80" r="4" fill="#B76E79" opacity="0.4"/>
+          <circle cx="60" cy="25" r="3" fill="#B76E79" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- Pink vignette overlay -->
+      <div class="pink-vignette"></div>
+
+      <!-- Watercolor pink splashes -->
+      <div class="watercolor-splash" style="width: 350px; height: 280px; background: #f8c8d4; top: 5%; left: 20%;"></div>
+      <div class="watercolor-splash" style="width: 280px; height: 220px; background: #fcd5df; top: 55%; right: 10%;"></div>
+      <div class="watercolor-splash" style="width: 200px; height: 200px; background: #f9d0d9; bottom: 10%; left: 5%;"></div>
+      <div class="watercolor-splash" style="width: 320px; height: 260px; background: #fbe0e8; top: 30%; left: 50%;"></div>
+
+      <!-- Soft pink gradient orbs -->
+      <div class="pink-orb" style="width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,182,193,0.25) 0%, transparent 70%); top: 20%; right: 20%;"></div>
+      <div class="pink-orb" style="width: 160px; height: 160px; background: radial-gradient(circle, rgba(255,192,203,0.3) 0%, transparent 70%); bottom: 30%; left: 15%;"></div>
+      <div class="pink-orb" style="width: 250px; height: 250px; background: radial-gradient(circle, rgba(248,200,212,0.2) 0%, transparent 70%); top: 60%; right: 5%;"></div>
+      <div class="pink-orb" style="width: 180px; height: 180px; background: radial-gradient(circle, rgba(252,213,223,0.25) 0%, transparent 70%); top: 8%; left: 60%;"></div>
+
+      <!-- Floating SVG rose petals -->
+      <div class="floating-petal" style="top: 12%; left: 8%; animation-duration: 7s;">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><ellipse cx="15" cy="15" rx="12" ry="8" transform="rotate(-30 15 15)" fill="#f8b4c8" opacity="0.7"/></svg>
+      </div>
+      <div class="floating-petal" style="top: 40%; right: 10%; animation-duration: 9s; animation-delay: 1s;">
+        <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(20 12 12)" fill="#f4a0b8" opacity="0.6"/></svg>
+      </div>
+      <div class="floating-petal" style="top: 70%; left: 5%; animation-duration: 8s; animation-delay: 3s;">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><ellipse cx="11" cy="11" rx="9" ry="5" transform="rotate(-15 11 11)" fill="#fcc8d8" opacity="0.7"/></svg>
+      </div>
+      <div class="floating-petal" style="top: 25%; right: 18%; animation-duration: 10s; animation-delay: 2s;">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><ellipse cx="14" cy="14" rx="11" ry="7" transform="rotate(40 14 14)" fill="#f8b4c8" opacity="0.5"/></svg>
+      </div>
+      <div class="floating-petal" style="bottom: 15%; left: 25%; animation-duration: 6s; animation-delay: 4s;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><ellipse cx="10" cy="10" rx="8" ry="5" transform="rotate(-45 10 10)" fill="#fbb6ce" opacity="0.6"/></svg>
+      </div>
+      <div class="floating-petal" style="top: 55%; left: 45%; animation-duration: 11s; animation-delay: 5s;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(10 12 12)" fill="#f9c0d0" opacity="0.5"/></svg>
+      </div>
+
+      <!-- Pink wave at bottom -->
+      <div class="pink-wave">
+        <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:80px;">
+          <path d="M0 60 C360 0, 540 120, 720 60 C900 0, 1080 120, 1440 60 L1440 120 L0 120Z" fill="#fce4ec"/>
+          <path d="M0 80 C360 30, 540 100, 720 70 C900 30, 1080 110, 1440 70 L1440 120 L0 120Z" fill="#f8c8d4" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- Sparkles container (populated by JS) -->
+      <div id="sparklesContainer"></div>
+
+      <!-- Pink bubbles container (populated by JS) -->
+      <div id="pinkBubbles"></div>
+
+      <!-- Pink lace border — top -->
+      <div class="lace-border lace-border--top">
+        <svg width="100%" height="20" viewBox="0 0 1440 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 20 Q36 0 72 20 Q108 0 144 20 Q180 0 216 20 Q252 0 288 20 Q324 0 360 20 Q396 0 432 20 Q468 0 504 20 Q540 0 576 20 Q612 0 648 20 Q684 0 720 20 Q756 0 792 20 Q828 0 864 20 Q900 0 936 20 Q972 0 1008 20 Q1044 0 1080 20 Q1116 0 1152 20 Q1188 0 1224 20 Q1260 0 1296 20 Q1332 0 1368 20 Q1404 0 1440 20" fill="none" stroke="#FFB6C1" stroke-width="1.5"/>
+          <path d="M0 20 Q36 5 72 20 Q108 5 144 20 Q180 5 216 20 Q252 5 288 20 Q324 5 360 20 Q396 5 432 20 Q468 5 504 20 Q540 5 576 20 Q612 5 648 20 Q684 5 720 20 Q756 5 792 20 Q828 5 864 20 Q900 5 936 20 Q972 5 1008 20 Q1044 5 1080 20 Q1116 5 1152 20 Q1188 5 1224 20 Q1260 5 1296 20 Q1332 5 1368 20 Q1404 5 1440 20" fill="none" stroke="#f8b4c8" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Pink lace border — bottom -->
+      <div class="lace-border lace-border--bottom">
+        <svg width="100%" height="20" viewBox="0 0 1440 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 20 Q36 0 72 20 Q108 0 144 20 Q180 0 216 20 Q252 0 288 20 Q324 0 360 20 Q396 0 432 20 Q468 0 504 20 Q540 0 576 20 Q612 0 648 20 Q684 0 720 20 Q756 0 792 20 Q828 0 864 20 Q900 0 936 20 Q972 0 1008 20 Q1044 0 1080 20 Q1116 0 1152 20 Q1188 0 1224 20 Q1260 0 1296 20 Q1332 0 1368 20 Q1404 0 1440 20" fill="none" stroke="#FFB6C1" stroke-width="1.5"/>
+          <path d="M0 20 Q36 5 72 20 Q108 5 144 20 Q180 5 216 20 Q252 5 288 20 Q324 5 360 20 Q396 5 432 20 Q468 5 504 20 Q540 5 576 20 Q612 5 648 20 Q684 5 720 20 Q756 5 792 20 Q828 5 864 20 Q900 5 936 20 Q972 5 1008 20 Q1044 5 1080 20 Q1116 5 1152 20 Q1188 5 1224 20 Q1260 5 1296 20 Q1332 5 1368 20 Q1404 5 1440 20" fill="none" stroke="#f8b4c8" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Confetti container (populated by JS on unlock) -->
+      <div id="confettiContainer"></div>
+
       <!-- Back button — returns to the intro overlay -->
       <button
         id="backBtn"
@@ -324,74 +782,120 @@
         Back
       </button>
 
-      <div class="max-w-2xl mx-auto px-6 py-16 sm:py-24">
+      <div class="max-w-2xl mx-auto px-6 py-16 sm:py-24 relative z-10">
         <!-- Decorative top line -->
         <div class="flex justify-center mb-10 fade-in-up">
           <div class="w-16 h-px bg-rosegold"></div>
         </div>
 
-        <!-- Heading section -->
-        <header class="text-center mb-14 fade-in-up">
-          <h1
-            class="font-serif text-4xl sm:text-5xl text-wine font-bold leading-tight"
-          >
-            Happy Monthsary lovelove!
-          </h1>
-          <!-- Decorative divider -->
-          <div class="flex items-center justify-center gap-3 mt-6">
-            <div class="w-12 h-px bg-rose"></div>
-            <div class="w-12 h-px bg-rose"></div>
+        <!-- Letter frame -->
+        <div class="letter-frame fade-in-up" style="position: relative;">
+          <!-- Pulsing pink heart glow behind letter -->
+          <div class="heart-glow">
+            <svg width="500" height="440" viewBox="0 0 500 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M250 420 C250 420, 30 270, 30 160 C30 70, 110 20, 180 20 C220 20, 250 50, 250 50 C250 50, 280 20, 320 20 C390 20, 470 70, 470 160 C470 270, 250 420, 250 420Z" fill="#FFB6C1" opacity="0.4"/>
+            </svg>
           </div>
-        </header>
+          <!-- Corner flourishes -->
+          <div class="frame-corner frame-corner--tl">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 38 C2 20, 8 8, 20 4 C12 12, 8 22, 6 34" stroke="#B76E79" stroke-width="1.2" fill="none"/>
+              <path d="M2 38 C14 36, 26 28, 36 16 C28 24, 18 30, 6 34" stroke="#B76E79" stroke-width="1.2" fill="none"/>
+              <circle cx="2" cy="38" r="2.5" fill="#E8A0A0"/>
+              <circle cx="20" cy="4" r="1.5" fill="#B76E79" opacity="0.5"/>
+              <circle cx="36" cy="16" r="1.5" fill="#B76E79" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="frame-corner frame-corner--tr">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 38 C2 20, 8 8, 20 4 C12 12, 8 22, 6 34" stroke="#B76E79" stroke-width="1.2" fill="none"/>
+              <path d="M2 38 C14 36, 26 28, 36 16 C28 24, 18 30, 6 34" stroke="#B76E79" stroke-width="1.2" fill="none"/>
+              <circle cx="2" cy="38" r="2.5" fill="#E8A0A0"/>
+              <circle cx="20" cy="4" r="1.5" fill="#B76E79" opacity="0.5"/>
+              <circle cx="36" cy="16" r="1.5" fill="#B76E79" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="frame-corner frame-corner--bl">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 38 C2 20, 8 8, 20 4 C12 12, 8 22, 6 34" stroke="#722F37" stroke-width="1.2" fill="none"/>
+              <path d="M2 38 C14 36, 26 28, 36 16 C28 24, 18 30, 6 34" stroke="#722F37" stroke-width="1.2" fill="none"/>
+              <circle cx="2" cy="38" r="2.5" fill="#B76E79"/>
+              <circle cx="20" cy="4" r="1.5" fill="#722F37" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="frame-corner frame-corner--br">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 38 C2 20, 8 8, 20 4 C12 12, 8 22, 6 34" stroke="#722F37" stroke-width="1.2" fill="none"/>
+              <path d="M2 38 C14 36, 26 28, 36 16 C28 24, 18 30, 6 34" stroke="#722F37" stroke-width="1.2" fill="none"/>
+              <circle cx="2" cy="38" r="2.5" fill="#B76E79"/>
+              <circle cx="20" cy="4" r="1.5" fill="#722F37" opacity="0.5"/>
+            </svg>
+          </div>
 
-        <!-- Letter body -->
-        <div class="relative">
-          <article
-            class="space-y-6 leading-relaxed text-gray-700 fade-in-up-delay-1"
-          >
-            <p class="font-serif text-xl text-wine italic">My Dearest Love,</p>
+          <!-- Heading section -->
+          <header class="text-center mb-14">
+            <h1
+              class="font-serif text-4xl sm:text-5xl text-wine font-bold leading-tight shimmer-text"
+            >
+              Happy Monthsary lovelove!
+            </h1>
+            <!-- Decorative divider -->
+            <div class="flex items-center justify-center gap-3 mt-6">
+              <div class="w-12 h-px bg-rose"></div>
+              <div class="w-12 h-px bg-rose"></div>
+            </div>
+          </header>
 
-            <p>
-              Eight months. It feels like we've shared a lifetime of laughter,
-              quiet moments, and all the little things that make
-              <span class="text-rosegold font-medium highlight-hover">us</span>
-              who we are. Every day with you is a gift I never want to stop
-              unwrapping.
+          <!-- Letter body -->
+          <div class="relative">
+            <article
+              class="space-y-6 leading-relaxed text-gray-700"
+            >
+              <p class="font-serif text-xl text-wine italic">My Dearest Love,</p>
+
+              <p>
+                Eight months. It feels like we've shared a lifetime of laughter,
+                quiet moments, and all the little things that make
+                <span class="text-rosegold font-medium highlight-hover">us</span>
+                who we are. Every day with you is a gift I never want to stop
+                unwrapping.
+              </p>
+
+              <p>
+                I love the way you make the ordinary feel
+                <span class="text-rosegold font-medium highlight-hover"
+                  >extraordinary</span
+                >
+                &mdash; how a simple conversation with you turns into the
+                highlight of my day, how your smile can turn everything around,
+                and how your presence alone makes everything feel like home.
+              </p>
+
+              <p>
+                Thank you for choosing me, for staying, for being patient, and for
+                loving me in ways I never thought I deserved. You are my
+                <span class="text-wine font-semibold highlight-hover"
+                  >favorite person</span
+                >, my safe place, and my greatest adventure.
+              </p>
+
+              <p>
+                Here's to many more months, many more memories, and a love that
+                only grows deeper with time.
+              </p>
+
+              <p class="pt-4">Forever and always yours,</p>
+            </article>
+          </div>
+
+          <!-- Signature / closing -->
+          <div class="mt-8">
+            <p class="font-serif text-2xl text-wine italic">
+              &mdash; CJay&#10084;
             </p>
-
-            <p>
-              I love the way you make the ordinary feel
-              <span class="text-rosegold font-medium highlight-hover"
-                >extraordinary</span
-              >
-              &mdash; how a simple conversation with you turns into the
-              highlight of my day, how your smile can turn everything around,
-              and how your presence alone makes everything feel like home.
-            </p>
-
-            <p>
-              Thank you for choosing me, for staying, for being patient, and for
-              loving me in ways I never thought I deserved. You are my
-              <span class="text-wine font-semibold highlight-hover"
-                >favorite person</span
-              >, my safe place, and my greatest adventure.
-            </p>
-
-            <p>
-              Here's to many more months, many more memories, and a love that
-              only grows deeper with time.
-            </p>
-
-            <p class="pt-4">Forever and always yours,</p>
-          </article>
+          </div>
         </div>
-
-        <!-- Signature / closing -->
-        <div class="mt-8 fade-in-up-delay-2">
-          <p class="font-serif text-2xl text-wine italic">
-            &mdash; CJay&#10084;
-          </p>
-        </div>
+        <!-- End letter frame -->
 
         <!-- ========================================
              REPLY SECTION
@@ -724,6 +1228,12 @@
 
             // Initialize signature pad after content is visible
             setTimeout(() => resizeCanvas(), 100);
+
+            // Start falling hearts and sparkles animation
+            createFallingHearts();
+            createSparkles();
+            createPinkBubbles();
+            createConfettiBurst();
           }, 600);
         } else {
           // Incorrect key: show error and shake the input
@@ -779,6 +1289,16 @@
 
         // Scroll back to top
         window.scrollTo(0, 0);
+
+        // Clear falling hearts and sparkles
+        const heartsContainer = document.getElementById("fallingHearts");
+        heartsContainer.innerHTML = "";
+        const sparklesContainer = document.getElementById("sparklesContainer");
+        sparklesContainer.innerHTML = "";
+        const bubblesContainer = document.getElementById("pinkBubbles");
+        bubblesContainer.innerHTML = "";
+        const confettiContainer = document.getElementById("confettiContainer");
+        confettiContainer.innerHTML = "";
 
         // Re-focus the key input
         setTimeout(() => keyInput.focus(), 100);
@@ -898,6 +1418,183 @@
         }
         // If not signed, let the form submit normally without attachment
       });
+
+      // --- Falling Hearts Animation ---
+      /**
+       * Creates falling heart and petal particles
+       * that float down the screen with a gentle sway.
+       */
+      function createFallingHearts() {
+        const container = document.getElementById("fallingHearts");
+        const symbols = ["♥", "♡", "❤", "✿", "❀", "♥"];
+        const colors = ["#E8A0A0", "#B76E79", "#722F37", "#e0b0b0", "#d4918a", "#FFB6C1", "#FFC0CB", "#f8b4c8", "#fbb6ce"];
+        const count = 15;
+
+        for (let i = 0; i < count; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("falling-particle");
+
+          const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const left = Math.random() * 100;
+          const size = Math.random() * 14 + 8;
+          const duration = Math.random() * 10 + 12;
+          const swayDuration = Math.random() * 3 + 2;
+          const delay = Math.random() * 15;
+          const opacity = Math.random() * 0.3 + 0.1;
+
+          particle.style.left = left + "%";
+          particle.style.animationDuration = duration + "s";
+          particle.style.animationDelay = delay + "s";
+          particle.style.opacity = opacity;
+
+          const span = document.createElement("span");
+          span.textContent = symbol;
+          span.style.fontSize = size + "px";
+          span.style.color = color;
+          span.style.animationDuration = swayDuration + "s";
+
+          particle.appendChild(span);
+          container.appendChild(particle);
+        }
+      }
+
+      /**
+       * Creates twinkling sparkle stars scattered
+       * across the background for a magical effect.
+       */
+      function createSparkles() {
+        const container = document.getElementById("sparklesContainer");
+        const count = 20;
+
+        for (let i = 0; i < count; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.classList.add("sparkle");
+
+          const top = Math.random() * 100;
+          const left = Math.random() * 100;
+          const size = Math.random() * 6 + 3;
+          const duration = Math.random() * 4 + 3;
+          const delay = Math.random() * 8;
+          const colors = ["#E8A0A0", "#B76E79", "#d4918a", "#e0b0b0", "#FFB6C1", "#FFC0CB", "#FFD1DC", "#f8b4c8", "#fbb6ce"];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          sparkle.style.top = top + "%";
+          sparkle.style.left = left + "%";
+          sparkle.style.width = size + "px";
+          sparkle.style.height = size + "px";
+          sparkle.style.animationDuration = duration + "s";
+          sparkle.style.animationDelay = delay + "s";
+
+          // Star shape using SVG
+          sparkle.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="${color}">
+            <polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9"/>
+          </svg>`;
+
+          container.appendChild(sparkle);
+        }
+      }
+
+      // --- Pink Heart Cursor Trail ---
+      /** Creates small pink hearts that follow the mouse cursor and float away */
+      let lastTrailTime = 0;
+      document.addEventListener("mousemove", (e) => {
+        // Only show trail when letter content is visible
+        if (letterContent.classList.contains("hidden")) return;
+        const now = Date.now();
+        if (now - lastTrailTime < 80) return; // throttle
+        lastTrailTime = now;
+
+        const heart = document.createElement("div");
+        heart.classList.add("cursor-heart");
+        const hearts = ["♥", "♡", "❤"];
+        const colors = ["#FFB6C1", "#FFC0CB", "#f8b4c8", "#E8A0A0", "#fbb6ce"];
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = e.clientX + "px";
+        heart.style.top = e.clientY + "px";
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        heart.style.fontSize = (Math.random() * 10 + 10) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1000);
+      });
+
+      // --- Floating Pink Bubbles ---
+      /** Creates rising pink bubbles that float upward */
+      function createPinkBubbles() {
+        const container = document.getElementById("pinkBubbles");
+        const count = 12;
+
+        for (let i = 0; i < count; i++) {
+          const bubble = document.createElement("div");
+          bubble.classList.add("pink-bubble");
+
+          const size = Math.random() * 20 + 8;
+          const left = Math.random() * 100;
+          const duration = Math.random() * 15 + 15;
+          const delay = Math.random() * 20;
+          const colors = [
+            "rgba(255,182,193,0.3)",
+            "rgba(255,192,203,0.25)",
+            "rgba(248,180,200,0.3)",
+            "rgba(251,182,206,0.2)",
+            "rgba(232,160,160,0.25)"
+          ];
+
+          bubble.style.width = size + "px";
+          bubble.style.height = size + "px";
+          bubble.style.left = left + "%";
+          bubble.style.background = `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5), ${colors[Math.floor(Math.random() * colors.length)]})`;
+          bubble.style.border = "1px solid rgba(255,182,193,0.2)";
+          bubble.style.animationDuration = duration + "s";
+          bubble.style.animationDelay = delay + "s";
+
+          container.appendChild(bubble);
+        }
+      }
+
+      // --- Pink Confetti Burst on Unlock ---
+      /** Shoots pink confetti from the top when the letter is unlocked */
+      function createConfettiBurst() {
+        const container = document.getElementById("confettiContainer");
+        const count = 40;
+        const shapes = ["circle", "square", "heart"];
+        const colors = ["#FFB6C1", "#FFC0CB", "#f8b4c8", "#E8A0A0", "#B76E79", "#fbb6ce", "#FFD1DC", "#f9c0d0"];
+
+        for (let i = 0; i < count; i++) {
+          const piece = document.createElement("div");
+          piece.classList.add("confetti-piece");
+
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+          const left = Math.random() * 100;
+          const duration = Math.random() * 2 + 2;
+          const delay = Math.random() * 0.8;
+          const size = Math.random() * 8 + 5;
+
+          piece.style.left = left + "%";
+          piece.style.animationDuration = duration + "s";
+          piece.style.animationDelay = delay + "s";
+
+          if (shape === "heart") {
+            piece.textContent = "♥";
+            piece.style.color = color;
+            piece.style.fontSize = size + "px";
+          } else {
+            piece.style.width = size + "px";
+            piece.style.height = size + "px";
+            piece.style.background = color;
+            if (shape === "circle") {
+              piece.style.borderRadius = "50%";
+            }
+          }
+
+          container.appendChild(piece);
+        }
+
+        // Clean up confetti after animation
+        setTimeout(() => { container.innerHTML = ""; }, 4000);
+      }
     </script>
   </body>
 </html>
