@@ -106,6 +106,18 @@
       /* Overlay fade-out transition */
       #overlay {
         transition: opacity 0.6s ease-out;
+        background:
+          linear-gradient(135deg, rgba(114,47,55,0.65) 0%, rgba(183,110,121,0.65) 50%, rgba(232,160,160,0.65) 100%),
+          url('images/Aesthetic Moodboard Heart Shape Frame Photo Collage.png') center / contain no-repeat;
+        background-color: #722f37;
+      }
+      @media (max-width: 639px) {
+        #overlay {
+          background:
+            linear-gradient(135deg, rgba(114,47,55,0.4) 0%, rgba(183,110,121,0.4) 50%, rgba(232,160,160,0.4) 100%),
+            url('images/Aesthetic Moodboard Heart Shape Frame Photo Collage.png') center / 100% auto no-repeat;
+          background-color: #722f37;
+        }
       }
 
       /* Subtle underline hover effect for highlighted text */
@@ -636,14 +648,6 @@
     <div
       id="overlay"
       class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
-      style="
-        background: linear-gradient(
-          135deg,
-          #722f37 0%,
-          #b76e79 50%,
-          #e8a0a0 100%
-        );
-      "
     >
       <!-- Blurred pink orbs in background -->
       <div class="overlay-orb" style="width: 250px; height: 250px; background: #FFB6C1; top: -5%; left: -5%;"></div>
@@ -734,22 +738,6 @@
           </svg>
         </div>
 
-        <h2
-          class="font-serif text-2xl sm:text-3xl text-wine font-semibold mb-2"
-        >
-          A Letter For You
-        </h2>
-
-        <!-- Small decorative heart divider -->
-        <div class="flex items-center justify-center gap-2 mb-6">
-          <div class="w-8 h-px" style="background: linear-gradient(90deg, transparent, #E8A0A0);"></div>
-          <span class="text-xs" style="color: #FFB6C1;">&#9829;</span>
-          <div class="w-8 h-px" style="background: linear-gradient(90deg, #E8A0A0, transparent);"></div>
-        </div>
-
-        <p class="text-rosegold text-sm mb-8">
-          Enter the key to unlock this letter
-        </p>
 
         <!-- Security key input -->
         <div id="input-wrapper">
@@ -1021,13 +1009,7 @@
             <h1
               class="font-serif text-4xl sm:text-5xl text-wine font-bold leading-tight shimmer-text"
             >
-              Happy Monthsary lovelove!
             </h1>
-            <!-- Decorative divider -->
-            <div class="flex items-center justify-center gap-3 mt-6">
-              <div class="w-12 h-px bg-rose"></div>
-              <div class="w-12 h-px bg-rose"></div>
-            </div>
           </header>
 
           <!-- Letter body -->
@@ -1035,48 +1017,11 @@
             <article
               class="space-y-6 leading-relaxed text-gray-700"
             >
-              <p class="font-serif text-xl text-wine italic">My Dearest Love,</p>
-
-              <p>
-                Eight months. It feels like we've shared a lifetime of laughter,
-                quiet moments, and all the little things that make
-                <span class="text-rosegold font-medium highlight-hover">us</span>
-                who we are. Every day with you is a gift I never want to stop
-                unwrapping.
-              </p>
-
-              <p>
-                I love the way you make the ordinary feel
-                <span class="text-rosegold font-medium highlight-hover"
-                  >extraordinary</span
-                >
-                &mdash; how a simple conversation with you turns into the
-                highlight of my day, how your smile can turn everything around,
-                and how your presence alone makes everything feel like home.
-              </p>
-
-              <p>
-                Thank you for choosing me, for staying, for being patient, and for
-                loving me in ways I never thought I deserved. You are my
-                <span class="text-wine font-semibold highlight-hover"
-                  >favorite person</span
-                >, my safe place, and my greatest adventure.
-              </p>
-
-              <p>
-                Here's to many more months, many more memories, and a love that
-                only grows deeper with time.
-              </p>
-
-              <p class="pt-4">Forever and always yours,</p>
             </article>
           </div>
 
           <!-- Signature / closing -->
           <div class="mt-8">
-            <p class="font-serif text-2xl text-wine italic">
-              &mdash; CJay&#10084;
-            </p>
           </div>
         </div>
         <!-- End letter frame -->
